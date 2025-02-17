@@ -8,7 +8,7 @@ package proyecto1;
  *
  * @author Mario
  */
-public class Usuario {
+public final class Usuario {
      private String username;
     private String password;
     private boolean activo;
