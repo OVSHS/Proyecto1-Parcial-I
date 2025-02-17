@@ -261,9 +261,13 @@ public class Tablero extends JFrame {
             piezasTablero[fila][columna] = new Soldado(fila == 3 ? Bando.NEGRO : Bando.ROJO, this);
         }
         if (piezasTablero[fila][columna] != null) {
-            String imagen = obtenerImagenPieza(piezasTablero[fila][columna]);
+        String imagen = obtenerImagenPieza(piezasTablero[fila][columna]);
+        try {
             botonesTablero[fila][columna].setIcon(new ImageIcon(getClass().getResource(rutaImagenes + imagen)));
+        } catch(Exception e) {
+            System.err.println("Error al cargar la imagen: " + e.getMessage());
         }
+    }
     }
 
     // Devuelve el nombre de la imagen asociada a la pieza
