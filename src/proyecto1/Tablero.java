@@ -6,7 +6,6 @@ package proyecto1;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.net.URL;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
@@ -218,10 +217,11 @@ public class Tablero extends JFrame {
     private void resaltarMovimientos(int filaOrigen, int colOrigen) {
         Pieza pieza = piezasTablero[filaOrigen][colOrigen];
         if (pieza != null) {
-            for (int f = 0; f < FILAS; f++) {
-                for (int c = 0; c < COLUMNAS; c++) {
-                    if (pieza.MovimientoPiezas(filaOrigen, colOrigen, f, c)) {
-                        botonesTablero[f][c].setBackground(Color.RED);
+            for (int fila = 0; fila < FILAS; fila++) {
+                for (int columna = 0; columna < COLUMNAS; columna++) {
+                    if (pieza.MovimientoPiezas(filaOrigen, colOrigen, fila, columna)
+                            && (piezasTablero[fila][columna] == null || piezasTablero[fila][columna].getBando() != pieza.getBando())) {
+                        botonesTablero[fila][columna].setBackground(Color.RED);
                     }
                 }
             }

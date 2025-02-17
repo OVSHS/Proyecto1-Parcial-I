@@ -39,14 +39,13 @@ public class Crearjugador {
 
         JPanel fondoPanel = new JPanel();
         fondoPanel.setBounds(0, 0, frame.getWidth(), frame.getHeight());
-        fondoPanel.setBackground(new Color(30, 30, 30)); 
+        fondoPanel.setBackground(new Color(30, 30, 30));
         fondoPanel.setLayout(null);
         frame.setContentPane(fondoPanel);
 
-       
         JPanel panelControles = new JPanel();
         panelControles.setBounds(30, 30, 340, 340);
-        panelControles.setBackground(new Color(0, 0, 0, 150)); 
+        panelControles.setBackground(new Color(0, 0, 0, 150));
         panelControles.setLayout(null);
         fondoPanel.add(panelControles);
 
@@ -94,6 +93,22 @@ public class Crearjugador {
         registerButton.setFont(new Font("Arial", Font.BOLD, 14));
         registerButton.setFocusPainted(false);
         panelControles.add(registerButton);
+
+        JButton volverButton = new JButton("VOLVER");
+        volverButton.setBounds(50, 290, 300, 50);
+        volverButton.setBackground(new Color(60, 63, 65));
+        volverButton.setForeground(Color.WHITE);
+        volverButton.setFont(new Font("Arial", Font.BOLD, 14));
+        volverButton.setFocusPainted(false);
+        frame.add(volverButton);
+
+        volverButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+                new MenuInicio();
+            }
+        });
 
         registerButton.addActionListener(new ActionListener() {
             @Override
