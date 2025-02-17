@@ -25,19 +25,19 @@ public final class Usuario {
     }
 
     // Get y Set
-    public String getUsername() {
+    public final String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
+    public final void setUsername(String username) {
         this.username = username;
     }
 
-    public String getPassword() {
+    public final String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public final void setPassword(String password) {
         this.password = password;
     }
 
