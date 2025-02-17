@@ -87,7 +87,7 @@ public class Crearjugador {
 
         fechaRegistro = fechaActual;
 
-        JButton registerButton = new JButton("CREAR PLAYER");
+        JButton registerButton = new JButton("CREAR JUGADOR");
         registerButton.setBounds(50, 200, 240, 50);
         registerButton.setBackground(new Color(60, 63, 65));
         registerButton.setForeground(Color.WHITE);

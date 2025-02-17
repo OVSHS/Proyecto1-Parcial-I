@@ -35,6 +35,11 @@ public class Tablero extends JFrame {
     private JLabel turnoLabel;
     private JPanel capturasNegro;
     private JPanel capturasRojo;
+    private StringBuilder movimientosNegro = new StringBuilder();
+    private StringBuilder movimientosRojo = new StringBuilder();
+    private JTextArea logNegroTextArea;
+    private JTextArea logRojoTextArea;
+
     // Constructor
     public Tablero(Usuario jugadorLogueado, Usuario oponente, Almacenamiento almacenamiento, JFrame menuFrame) {
         this.jugadorLogueado = jugadorLogueado;
@@ -65,6 +70,34 @@ public class Tablero extends JFrame {
         turnoLabel.setForeground(Color.WHITE);
         panelTurno.add(turnoLabel);
         add(panelTurno, BorderLayout.NORTH);
+
+        JPanel panelLogs = new JPanel();
+        panelLogs.setLayout(new BoxLayout(panelLogs, BoxLayout.Y_AXIS));
+        JLabel negroLabel = new JLabel("Movimientos Negros:");
+        negroLabel.setForeground(Color.BLACK);
+        negroLabel.setFont(new Font("Arial", Font.BOLD, 14));
+        logNegroTextArea = new JTextArea();
+        logNegroTextArea.setEditable(false);
+        logNegroTextArea.setFont(new Font("Arial", Font.PLAIN, 12));
+        logNegroTextArea.setForeground(Color.WHITE);
+        logNegroTextArea.setBackground(new Color(30, 30, 30));
+        JScrollPane movimientonegro = new JScrollPane(logNegroTextArea);
+        movimientonegro.setPreferredSize(new Dimension(300, 150));
+        JLabel rojoLabel = new JLabel("Movimientos Rojas:");
+        rojoLabel.setForeground(Color.BLACK);
+        rojoLabel.setFont(new Font("Arial", Font.BOLD, 14));
+        logRojoTextArea = new JTextArea();
+        logRojoTextArea.setEditable(false);
+        logRojoTextArea.setFont(new Font("Arial", Font.PLAIN, 12));
+        logRojoTextArea.setForeground(Color.WHITE);
+        logRojoTextArea.setBackground(new Color(30, 30, 30));
+        JScrollPane movimientorojo = new JScrollPane(logRojoTextArea);
+        movimientorojo.setPreferredSize(new Dimension(300, 150));
+        panelLogs.add(negroLabel);
+        panelLogs.add(movimientonegro);
+        panelLogs.add(rojoLabel);
+        panelLogs.add(movimientorojo);
+        add(panelLogs, BorderLayout.WEST);
 
         JPanel panelSuperior = new JPanel(new GridLayout(5, COLUMNAS, 1, 1));
         for (int fila = 0; fila < 5; fila++) {
@@ -301,6 +334,15 @@ public class Tablero extends JFrame {
             botonesTablero[filaDestino][colDestino].setIcon(new ImageIcon(getClass().getResource(rutaImagenes + imagen)));
             botonesTablero[filaOrigen][colOrigen].setIcon(null);
 
+            String logMovimiento = "Movimiento: " + pieza.getClass().getSimpleName() + " de ("
+                    + filaOrigen + ", " + colOrigen + ") a (" + filaDestino + ", " + colDestino + ")";
+            if (pieza.getBando() == Bando.NEGRO) {
+                movimientosNegro.append(logMovimiento).append("\n");
+            } else {
+                movimientosRojo.append(logMovimiento).append("\n");
+            }
+            movimientospiezass();
+
             turnoActual = (turnoActual == Bando.ROJO) ? Bando.NEGRO : Bando.ROJO;
             turnoLabel.setOpaque(true);
             if (turnoActual == Bando.ROJO) {
@@ -313,6 +355,11 @@ public class Tablero extends JFrame {
                 turnoLabel.setForeground(Color.WHITE);
             }
         }
+    }
+
+    private void movimientospiezass() {
+        logNegroTextArea.setText(movimientosNegro.toString());
+        logRojoTextArea.setText(movimientosRojo.toString());
     }
 
     // Verifica que los generales no se vean directamente
